@@ -9,6 +9,29 @@ solve('ab') = 'a'. Last occurrence is equal to first occurrence of each characte
 solve("axyzxyz") = 'x'
 */
 
-function solve(st) {
-   //..
+const solve = (st) => {
+  let dict = {};
+  let highestDiff = ['', 0];
+  let currentDiff;
+  console.log('here is st: ' + st);
+  for(let i = 0; i < st.length; i++) {
+     if(dict[st[i]] === undefined) {
+        dict[st[i]] = i;
+        if(highestDiff[0] === '') {
+         highestDiff = [st[i], i];
+        }
+     } else {
+        currentDiff = i - dict[st[i]];
+        if(currentDiff === highestDiff[1]) {
+           if(highestDiff[0] > st[i]) {
+              highestDiff = [st[i], currentDiff];
+           } 
+        }
+        if(currentDiff > highestDiff[1]) {
+          highestDiff = [st[i], currentDiff];
+        }
+     }
+     console.log('here is highestDiff: ' + highestDiff);
+  }
+  return highestDiff[0];
 }
